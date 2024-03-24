@@ -1,0 +1,22 @@
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+body {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  overflow-y: scroll;
+  font-family: "Alibaba PuHuiTi";
+}
+:deep(.el-dialog) {
+  background: linear-gradient(
+    255.87deg,
+    #ffffff 20.67%,
+    #c8eaef 190.21%
+  ) !important;
+}
