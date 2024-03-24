@@ -25,56 +25,6 @@
     </div>
 
     <div class="result">
-      <!-- <el-table
-        ref="tableRef"
-        row-key="date"
-        :data="tableData"
-        style="width: 100%"
-      >
-        <el-table-column
-          prop="date"
-          label="Date"
-          sortable
-          column-key="date"
-          :filters="[
-            { text: '2016-05-01', value: '2016-05-01' },
-            { text: '2016-05-02', value: '2016-05-02' },
-            { text: '2016-05-03', value: '2016-05-03' },
-            { text: '2016-05-04', value: '2016-05-04' },
-          ]"
-          :filter-method="filterHandler"
-        />
-        <el-table-column prop="name" label="Name" />
-        <el-table-column
-          prop="address"
-          label="Address"
-          :formatter="formatter"
-        /><el-table-column
-          prop="tag"
-          label="Tag"
-          :filters="[
-            { text: '无风险', value: '无风险' },
-            { text: '低风险', value: '低风险' },
-            { text: '高风险', value: '高风险' },
-          ]"
-          :filter-method="filterTag"
-          filter-placement="bottom-end"
-        >
-          <template #default="scope">
-            <el-tag
-              :type="
-                getRank(scope.row.y_pred) == '无风险'
-                  ? 'success'
-                  : getRank(scope.row.y_pred) == '低风险'
-                  ? 'warning'
-                  : 'danger'
-              "
-              disable-transitions
-              >{{ getRank(scope.row.y_pred) }}</el-tag
-            >
-          </template>
-        </el-table-column>
-      </el-table> -->
       <el-table
         :data="
           outputData
@@ -153,16 +103,11 @@ const clearFilter = () => {
   // @ts-expect-error
   tableRef.value.clearFilter();
 };
-const formatter = (row, column) => {
-  return row.address;
-};
+
 const filterTag = (value, row, th) => {
   return getRank(row.y_pred, th) === value;
 };
-const filterHandler = (value, row, column) => {
-  const property = column["property"];
-  return row[property] === value;
-};
+
 const getRank = (y_pred, th) => {
   y_pred = parseFloat(y_pred);
   console.log(y_pred, th);
@@ -174,38 +119,7 @@ const getRank = (y_pred, th) => {
     return "高风险";
   }
 };
-const tableData = [
-  {
-    date: "2016-05-03",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-    y_pred: 0.2,
-    tag: "Home",
-  },
-  {
-    date: "2016-05-02",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-    y_pred: 0.4,
-    tag: "Office",
-  },
-  {
-    date: "2016-05-04",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-    y_pred: 0.6,
 
-    tag: "Home",
-  },
-  {
-    date: "2016-05-01",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-    y_pred: 1,
-
-    tag: "Office",
-  },
-];
 import { Search } from "@element-plus/icons-vue";
 import { ref, defineProps, defineEmits, watch } from "vue";
 const searching = ref(false);
