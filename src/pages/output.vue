@@ -26,6 +26,7 @@
 
     <div class="result">
       <el-table
+        :default-sort="{ prop: 'y_pred', order: 'descending' }"
         :data="
           outputData
             ? !searching
@@ -42,10 +43,16 @@
         height="100%"
       >
         <el-table-column
-          v-for="item in outputDataHeader"
-          :key="item"
-          :label="item"
-          :prop="item"
+          label="ID"
+          prop="ID"
+          header-align="center"
+          show-overflow-tooltip
+        >
+        </el-table-column>
+        <el-table-column
+          label="y_pred"
+          prop="y_pred"
+          sortable
           header-align="center"
           show-overflow-tooltip
         >

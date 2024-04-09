@@ -9,7 +9,7 @@
       </div>
       <div class="divider"></div>
       <div class="options">
-        <div class="item">
+        <div class="item" @click="handleDownloadModel">
           <div class="left">模型文件下载</div>
           <div class="line"></div>
           <div class="text">
@@ -18,7 +18,7 @@
             <div class="underLine"></div>
           </div>
         </div>
-        <div class="item">
+        <div class="item" @click="handleDownloadTrainData">
           <div class="left">训练数据下载</div>
           <div class="line"></div>
           <div class="text">
@@ -27,7 +27,7 @@
             <div class="underLine"></div>
           </div>
         </div>
-        <div class="item">
+        <div class="item" @click="handleDownloadTestData">
           <div class="left">测试数据下载</div>
           <div class="line"></div>
           <div class="text">
@@ -36,7 +36,7 @@
             <div class="underLine"></div>
           </div>
         </div>
-        <div class="item">
+        <div class="item" @click="handleDownloadExample">
           <div class="left">样例数据下载</div>
           <div class="line"></div>
           <div class="text">
@@ -51,8 +51,83 @@
 </template>
 <script setup>
 import { ref, onMounted, defineProps } from "vue";
-
+import axios from "axios";
 const { myVw, myVh } = defineProps(["myVw", "myVh"]);
+
+// 下载模型文件
+const handleDownloadModel = () => {
+  axios({
+    url: "testData/model.zip",
+    method: "GET",
+    responseType: "blob",
+  })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "model.zip");
+      document.body.appendChild(link);
+      link.click();
+    })
+    .catch((error) => {
+      console.error("Error downloading file:", error);
+    });
+};
+const handleDownloadTrainData = () => {
+  axios({
+    url: "testData/trainData.zip",
+    method: "GET",
+    responseType: "blob",
+  })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "trainData.zip");
+      document.body.appendChild(link);
+      link.click();
+    })
+    .catch((error) => {
+      console.error("Error downloading file:", error);
+    });
+};
+const handleDownloadTestData = () => {
+  axios({
+    url: "testData/testData.zip",
+    method: "GET",
+    responseType: "blob",
+  })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "testData.zip");
+      document.body.appendChild(link);
+      link.click();
+    })
+    .catch((error) => {
+      console.error("Error downloading file:", error);
+    });
+};
+// 下载样例文件
+const handleDownloadExample = () => {
+  axios({
+    url: "testData/example.zip",
+    method: "GET",
+    responseType: "blob",
+  })
+    .then((response) => {
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", "example.zip");
+      document.body.appendChild(link);
+      link.click();
+    })
+    .catch((error) => {
+      console.error("Error downloading file:", error);
+    });
+};
 </script>
 <style lang="less" scoped>
 .downloadContainer {

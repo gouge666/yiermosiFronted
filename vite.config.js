@@ -27,7 +27,8 @@ export default defineConfig({
     proxy: {
       // business-server的地址
       "/api": {
-        target: "http://172.17.0.2:5888/",
+        target: "http://127.0.0.1:5888/",
+        // target: "http://172.17.0.2:5888/",
         ws: true, //代理websockets
         changeOrigin: true, // 是否跨域，虚拟的站点需要更管origin
         rewrite: (path) => path.replace(RegExp("^/api"), ""),

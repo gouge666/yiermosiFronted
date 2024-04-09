@@ -27,11 +27,11 @@
           class="back"
           :style="{
             left: leftValue + 'rem',
-            width: leftValue == 30.5 ? 8 + 'rem' : 5 + 'rem',
+            width: leftValue == 24.5 ? 8 + 'rem' : 5 + 'rem',
           }"
         ></div>
         <div class="item" @click="view = 'home'">主页</div>
-        <div class="item" @click="view = 'des'">介绍</div>
+        <!-- <div class="item" @click="view = 'des'">介绍</div> -->
         <div class="item" @click="view = 'use'">使用</div>
         <div class="item" @click="view = 'output'">结果</div>
         <div class="item" @click="view = 'download'">下载</div>
@@ -121,28 +121,26 @@ const leftValue = computed(() => {
   if (view.value == 'home') {
     return 0.5;
   }
-  if (view.value ==  'des') {
+  if (view.value ==  'use') {
     return 6.5;
   }
-  if (view.value == 'use') {
+  if (view.value == 'output') {
     return 12.5;
   }
-  if (view.value == 'output') {
+  if (view.value == 'download') {
     return 18.5;
   }
-  if (view.value == 'download') {
+  if (view.value == 'connect') {
     return 24.5;
   }
-  if (view.value == 'connect') {
-    return 30.5;
-  }
+
 });
 const handleGoToOutput = ()=>{
   view.value = 'output'
   outputted.value = false
 }
 // 阈值
-const th = ref(0);
+const th = ref(0.5);
 const handleUpdateTh = (e)=>{
   console.log("handleUpdateTh",e);
   th.value = e

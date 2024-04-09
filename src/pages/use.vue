@@ -122,7 +122,7 @@ const currentPage = ref(1);
 const pageSize = ref(10);
 const csvTotal = ref(0);
 const submitted = ref(false);
-const yuzhi = ref(0);
+const yuzhi = ref(0.5);
 const marks = {
   0: "0",
   0.1: "0.1",
@@ -154,13 +154,17 @@ const submitUpload = () => {
         },
         responseType: 'blob'  // 设置响应类型为二进制数据
     }).then(response => {
-      const blob = new Blob([response.data], { type: 'application/octet-stream' });
-    const file = new File([blob], 'output.csv', { type: 'application/octet-stream' });
+      console.log("response",response)
+      if(response.data.size == 0){
+        alert("请输入完整的特征列")
+      }else{
+        const blob = new Blob([response.data], { type: 'application/octet-stream' });
+        const file = new File([blob], 'output.csv', { type: 'application/octet-stream' });
 
-    // 现在您可以在前端处理这个 File 对象，例如上传到服务器或者展示给用户
-    submitted.value = false
-
-    emit('outputted', file);
+        emit('outputted', file);
+      }
+      // 现在您可以在前端处理这个 File 对象，例如上传到服务器或者展示给用户
+      submitted.value = false
     }).catch(error => {
         console.error('Error uploading file:', error);
     });
